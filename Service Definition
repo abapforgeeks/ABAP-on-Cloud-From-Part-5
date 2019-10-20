@@ -1,0 +1,6 @@
+@EndUserText.label: 'Sales Order Data'
+define service Zui_sales {
+  expose zc_sales_master as SalesMaster;
+  expose /DMO/I_Customer as CustomerData;
+  expose I_Currency as CurrencyInfo;
+}
