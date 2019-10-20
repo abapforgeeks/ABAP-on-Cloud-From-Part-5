@@ -1,0 +1,15 @@
+managed implementation in class zcl_c_sales_master unique;
+
+define behavior for zc_sales_master alias Sales //alias <alias_name>
+
+persistent table zsales_master
+
+lock master
+{
+field( readonly ) created_by,created_on,customer_name,City;
+field( mandatory ) sales_order,customer;
+field(features : instance) currency_code;
+  create;
+  update;
+  delete;
+}
