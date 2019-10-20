@@ -1,0 +1,20 @@
+*"* use this source file for the definition and implementation of
+*"* local helper classes, interface definitions and type
+*"* declarations
+CLASS lhc_travel DEFINITION INHERITING FROM cl_abap_behavior_handler.
+
+  PRIVATE SECTION.
+
+    TYPES tt_sales_update TYPE TABLE FOR UPDATE zc_sales_master.
+
+    METHODS get_features   FOR FEATURES IMPORTING keys REQUEST requested_features FOR Sales   RESULT result.
+*    METHODS dummy for modify importing it_sales for create Sales.
+ENDCLASS.
+
+CLASS lhc_travel IMPLEMENTATION.
+
+  METHOD get_features.
+*  CONCATENATE 'hello' space INTO DATA(lv_test).
+  ENDMETHOD.
+
+ENDCLASS.
