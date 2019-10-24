@@ -8,7 +8,6 @@ lock master
 {
 
 field( readonly ) created_by,created_on,customer_name,City;
-field( mandatory ) sales_order;
   create;
   update;
   delete;
