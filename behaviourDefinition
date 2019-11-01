@@ -1,14 +1,17 @@
-implementation managed ;
+managed implementation in class zcl_my_sales unique;
 
-define behavior for zc_sales_master alias Sales //alias <alias_name>
+define behavior for zc_sales_master alias Sales
 
 persistent table zsales_master
-
 lock master
 {
+field(readonly) customer_name;
 
-field( readonly ) created_by,created_on,customer_name,City;
   create;
   update;
   delete;
+//Action to Sales Order Status Complete.
+action setComplete result[1] $self;
+
+
 }
