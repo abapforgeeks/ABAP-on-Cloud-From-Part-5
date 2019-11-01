@@ -1,20 +1,28 @@
-*"* use this source file for the definition and implementation of
-*"* local helper classes, interface definitions and type
-*"* declarations
-CLASS lhc_travel DEFINITION INHERITING FROM cl_abap_behavior_handler.
-
+CLASS lhc_Sales DEFINITION INHERITING FROM cl_abap_behavior_handler.
   PRIVATE SECTION.
 
-    TYPES tt_sales_update TYPE TABLE FOR UPDATE zc_sales_master.
+    METHODS take_action FOR MODIFY
+      IMPORTING keys FOR ACTION Sales~setComplete RESULT result.
 
-    METHODS get_features   FOR FEATURES IMPORTING keys REQUEST requested_features FOR Sales   RESULT result.
-*    METHODS dummy for modify importing it_sales for create Sales.
 ENDCLASS.
 
-CLASS lhc_travel IMPLEMENTATION.
+CLASS lhc_Sales IMPLEMENTATION.
 
-  METHOD get_features.
-*  CONCATENATE 'hello' space INTO DATA(lv_test).
+  METHOD take_action.
+
+    MODIFY ENTITIES OF zc_sales_master
+    IN LOCAL MODE
+    ENTITY Sales
+    UPDATE FROM VALUE #( FOR key IN keys ( sales_order = key-sales_order
+                                                status = 'Completed'
+                                                created_on = '20191030'
+                                       %control-status = if_abap_behv=>mk-on
+                                       %control-created_on = if_abap_behv=>mk-on  )
+
+                         )
+                                       FAILED   failed
+                                       REPORTED reported.
+
   ENDMETHOD.
 
 ENDCLASS.
